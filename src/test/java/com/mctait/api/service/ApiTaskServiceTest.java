@@ -91,15 +91,15 @@ class ApiTaskServiceTest {
     void updateTaskStatus_shouldUpdateIfExists() {
         Task task = new Task();
         task.setId(1L);
-        task.setStatus("Old");
+        task.setStatus("To Do");
 
         when(taskRepository.findById(1L)).thenReturn(Optional.of(task));
         when(taskRepository.save(task)).thenReturn(task);
 
-        boolean updated = taskService.updateTaskStatus(1L, "New");
+        boolean updated = taskService.updateTaskStatus(1L, "In Progress");
 
         assertTrue(updated);
-        assertEquals("New", task.getStatus());
+        assertEquals("In Progress", task.getStatus());
         verify(taskRepository, times(1)).save(task);
     }
 
@@ -107,7 +107,7 @@ class ApiTaskServiceTest {
     void updateTaskStatus_shouldReturnFalseIfNotExists() {
         when(taskRepository.findById(99L)).thenReturn(Optional.empty());
 
-        boolean updated = taskService.updateTaskStatus(99L, "New");
+        boolean updated = taskService.updateTaskStatus(99L, "To Do");
 
         assertFalse(updated);
         verify(taskRepository, never()).save(any());

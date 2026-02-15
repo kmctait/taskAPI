@@ -15,6 +15,10 @@ public class ApiTaskService {
 
     private final TaskRepository taskRepository;
 
+    private static final List<String> VALID_STATUSES = List.of(
+            "To Do", "In Progress", "Completed", "Cancelled"
+    );
+
     @Autowired
     public ApiTaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
@@ -43,13 +47,18 @@ public class ApiTaskService {
 
     @Modifying
     @Transactional
-    public boolean updateTaskStatus(Long taskId, String newStatus) {
-        return taskRepository.findById(taskId)
-                .map(task -> {
-                    task.setStatus(newStatus);
-                    taskRepository.save(task);  // persists the change
-                    return true;
-                })
-                .orElse(false);
+    public boolean updateTaskStatus(Long id, String newStatus) {
+        if (!VALID_STATUSES.contains(newStatus)) {
+            return false; // invalid status
+        }
+
+        Optional<Task> taskOpt = taskRepository.findById(id);
+        if (taskOpt.isPresent()) {
+            Task task = taskOpt.get();
+            task.setStatus(newStatus);
+            taskRepository.save(task);
+            return true;
+        }
+        return false; // task not found
     }
 }
