@@ -5,6 +5,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.util.Date;
 
 @Entity
@@ -13,9 +17,20 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Title is required")
+    @Size(max = 255, message = "Title must be less than 255 characters")
     private String title;
+
+    // Description is optional
+    @Size(max = 255, message = "Description must be less than 255 characters")
     private String description;
+
+    @NotBlank(message = "Status is required")
+    @Size(max = 255, message = "Status must be less than 255 characters")
     private String status;
+
+    @NotNull(message = "Due Date is required")
     private Date dueDate;
 
     public Task() {}

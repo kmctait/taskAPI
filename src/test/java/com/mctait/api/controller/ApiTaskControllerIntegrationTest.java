@@ -12,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Calendar;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -33,10 +35,6 @@ class ApiTaskControllerIntegrationTest {
         taskRepository.deleteAll();
     }
 
-    // --------------------------------------------------
-    // CREATE
-    // --------------------------------------------------
-
     @Test
     void createTask_shouldReturnCreatedTask() throws Exception {
 
@@ -44,6 +42,7 @@ class ApiTaskControllerIntegrationTest {
         task.setTitle("Integration Task");
         task.setDescription("Testing create endpoint");
         task.setStatus("Pending");
+        task.setDueDate(Calendar.getInstance().getTime());
 
         mockMvc.perform(post("/taskapi/create")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -53,16 +52,14 @@ class ApiTaskControllerIntegrationTest {
                 .andExpect(jsonPath("$.status").value("Pending"));
     }
 
-    // --------------------------------------------------
-    // GET ALL
-    // --------------------------------------------------
-
     @Test
     void getAllTasks_shouldReturnList() throws Exception {
 
         Task task = new Task();
         task.setTitle("Stored Task");
         task.setStatus("Pending");
+        task.setDescription("This is my stored task");
+        task.setDueDate(Calendar.getInstance().getTime());
         taskRepository.save(task);
 
         mockMvc.perform(get("/taskapi/get-all-tasks"))
@@ -70,17 +67,14 @@ class ApiTaskControllerIntegrationTest {
                 .andExpect(jsonPath("$[0].title").value("Stored Task"));
     }
 
-    // --------------------------------------------------
-    // GET BY ID
-    // --------------------------------------------------
-
     @Test
     void getTaskById_shouldReturnTask() throws Exception {
 
         Task task = new Task();
-        task.setId(1L);
         task.setTitle("Find Me");
         task.setStatus("Pending");
+        task.setDescription("This is my pending task");
+        task.setDueDate(Calendar.getInstance().getTime());
         task = taskRepository.save(task);
 
         mockMvc.perform(get("/taskapi/get-task/" + task.getId()))
@@ -91,13 +85,9 @@ class ApiTaskControllerIntegrationTest {
     @Test
     void getTaskById_shouldReturn404IfNotFound() throws Exception {
 
-        mockMvc.perform(get("/taskapi/999"))
+        mockMvc.perform(get("/taskapi/get-task/999"))
                 .andExpect(status().isNotFound());
     }
-
-    // --------------------------------------------------
-    // UPDATE STATUS
-    // --------------------------------------------------
 
     @Test
     void updateStatus_shouldUpdateSuccessfully() throws Exception {
@@ -105,6 +95,8 @@ class ApiTaskControllerIntegrationTest {
         Task task = new Task();
         task.setTitle("Task To Update");
         task.setStatus("Pending");
+        task.setDescription("This is task to update");
+        task.setDueDate(Calendar.getInstance().getTime());
         task = taskRepository.save(task);
 
         UpdateStatusRequest request = new UpdateStatusRequest();
@@ -129,15 +121,15 @@ class ApiTaskControllerIntegrationTest {
                 .andExpect(status().isNotFound());
     }
 
-    // --------------------------------------------------
-    // DELETE
-    // --------------------------------------------------
-
     @Test
     void deleteTask_shouldReturnNoContent() throws Exception {
 
         Task task = new Task();
         task.setTitle("Task To Delete");
+        task.setStatus("Pending");
+        task.setDescription("This is the task to delete");
+        task.setDueDate(Calendar.getInstance().getTime());
+
         task = taskRepository.save(task);
 
         mockMvc.perform(delete("/taskapi/delete/" + task.getId()))
