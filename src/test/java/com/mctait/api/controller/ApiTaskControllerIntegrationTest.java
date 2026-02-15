@@ -102,7 +102,7 @@ class ApiTaskControllerIntegrationTest {
         UpdateStatusRequest request = new UpdateStatusRequest();
         request.setStatus("Completed");
 
-        mockMvc.perform(patch("/taskapi/update-status/" + task.getId())
+        mockMvc.perform(post("/taskapi/update-status/" + task.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
@@ -115,7 +115,7 @@ class ApiTaskControllerIntegrationTest {
         UpdateStatusRequest request = new UpdateStatusRequest();
         request.setStatus("Completed");
 
-        mockMvc.perform(patch("/taskapi/update-status/999")
+        mockMvc.perform(post("/taskapi/update-status/999")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isNotFound());
