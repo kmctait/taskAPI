@@ -19,3 +19,13 @@ See src/main/resources for:
 ## Tests
 
 Unit Tests and Integration Tests can be found under src/test/java
+
+## Start API Service
+
+From Intellij:
+- mvn clean package
+- mvn sprint-boot:run
+
+Alternatively, build within Intellij, click the green Run button
+
+In future, add gradle tasks
