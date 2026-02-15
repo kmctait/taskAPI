@@ -14,6 +14,11 @@ import java.util.Optional;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * More unhappy path testing required particularly with respect to validation of input
+ * For example, all required fields need to be present - gap in main body of code perhaps
+ */
+
 @ExtendWith(MockitoExtension.class) // JUnit 5 + Mockito
 class ApiTaskServiceTest {
 

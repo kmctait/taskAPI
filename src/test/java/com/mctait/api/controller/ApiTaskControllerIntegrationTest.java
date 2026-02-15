@@ -17,6 +17,11 @@ import java.util.Calendar;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * Integration tests mocking the calling of API endpoints with expected results
+ * Makes use of in-memory H2 database
+ */
+
 @SpringBootTest(properties = "spring.profiles.active=test")
 @AutoConfigureMockMvc
 class ApiTaskControllerIntegrationTest {
