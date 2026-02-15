@@ -61,7 +61,7 @@ public class ApiTaskController {
     }
 
     @Operation(summary = "Update Status of a Task given its ID")
-    @PatchMapping("/update-status/{id}")
+    @PostMapping("/update-status/{id}")
     public ResponseEntity<String> updateStatus(
             @PathVariable Long id,
             @Valid @RequestBody UpdateStatusRequest request) {

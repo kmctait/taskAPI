@@ -80,6 +80,15 @@
             <version>2.5.0</version>
         </dependency>
 
+        <!-- Front End -->
+
+        <!-- Thymeleaf -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+
     </dependencies>
 
     <build>
