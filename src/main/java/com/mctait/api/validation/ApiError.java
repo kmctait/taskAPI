@@ -3,6 +3,10 @@ package com.mctait.api.validation;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Error class for ExceptionHandler
+ */
+
 public class ApiError {
 
     private final LocalDateTime timestamp;
@@ -16,8 +20,6 @@ public class ApiError {
         this.message = message;
         this.errors = errors;
     }
-
-    // getters
 
     public LocalDateTime getTimestamp() {
         return timestamp;

@@ -11,6 +11,11 @@ import jakarta.validation.constraints.Size;
 
 import java.util.Date;
 
+/**
+ * Model Class for Task Object
+ * Restrictions and validations given by Spring annotations
+ */
+
 @Entity
 @Table(name = "Tasks")
 public class Task {

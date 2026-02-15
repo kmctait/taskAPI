@@ -1,5 +1,8 @@
 package com.mctait.api.dto;
 
+/**
+ * DTO for processing Status updates in Restful manner
+ */
 public class UpdateStatusRequest {
 
     private String status;

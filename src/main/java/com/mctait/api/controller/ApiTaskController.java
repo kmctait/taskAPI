@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Rest Controller for the Task API
+ * Endpoints are marked with Operation annotation for Swagger documentation
+ */
+
 @RestController
 @RequestMapping("/taskapi")
 @Tag(name = "Task API", description = "CRUD Operations on Tasks")
