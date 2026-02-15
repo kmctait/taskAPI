@@ -16,6 +16,10 @@ See src/main/resources for:
 - Postman collection
 - OpenApi JSON
 
+## Persistence
+
+Connection details to a SQL Server database instance are given in src/main/resources/application.properties
+
 ## Tests
 
 Unit Tests and Integration Tests can be found under src/test/java
