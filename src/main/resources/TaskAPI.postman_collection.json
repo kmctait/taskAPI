@@ -59,7 +59,7 @@
     {
       "name": "Update",
       "request": {
-        "method": "PATCH",
+        "method": "POST",
         "header": [
           {
             "key": "Content-Type",
@@ -72,7 +72,7 @@
           "raw": "{\n  \"status\": \"Foo\"\n}"
         },
         "url": {
-          "raw": "http://localhost:8080/taskapi/update-status/1",
+          "raw": "http://localhost:8080/taskapi/update-status/10",
           "protocol": "http",
           "host": [
             "localhost"
@@ -81,7 +81,7 @@
           "path": [
             "taskapi",
             "update-status",
-            "1"
+            "10"
           ]
         }
       },
